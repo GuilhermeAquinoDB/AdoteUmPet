@@ -2,8 +2,22 @@ import type { NextPage } from 'next'
 import List from '../ui/components/List/List';
 import Title from '../ui/components/Title/Title';
 import { Dialog, TextField, Grid, DialogActions, Button, Snackbar } from '@mui/material';
+import { useIndex } from '../data/hooks/pages/useIndex';
 
 const Home: NextPage = () => {
+  const { 
+    listPets,
+    petSelected,
+    setPetSelected,
+    email,
+    setEmail,
+    valor,
+    setValor,
+    message,
+    setMessage,
+    adotar
+  } = useIndex();
+
   return (
     <div>
      <Title 
@@ -14,26 +28,15 @@ const Home: NextPage = () => {
           </span>
       } />
       <List 
-        pets={[
-          {
-            id: 1,
-            name: 'Oscar',
-            history: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex dolorem officia nulla libero quae iure aspernatur expedita, eveniet aliquam magni, impedit culpa dicta labore assumenda consectetur quaerat delectus maiores perspiciatis.',
-            photo: 'https://media.istockphoto.com/photos/its-a-paddle-board-time-picture-id1327654972'
-          },
-          {
-            id: 2,
-            name: 'Lálá',
-            history: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex dolorem officia nulla libero quae iure aspernatur expedita, eveniet aliquam magni, impedit culpa dicta labore assumenda consectetur quaerat delectus maiores perspiciatis.',
-            photo: 'https://images.unsplash.com/photo-1561037404-61cd46aa615b'
-          }
-        ]}
+        pets={listPets} 
+        onSelect={(pet) => setPetSelected(pet)}     
       />
 
       <Dialog 
-        open={false}
+        open={petSelected !== null}
         fullWidth
         PaperProps={{ sx: { p: 5 }}}
+        onClose={() => setPetSelected(null)}
       >
         <Grid container spacing={2} >
           <Grid item xs={12} >
@@ -41,6 +44,8 @@ const Home: NextPage = () => {
               label={'E-mail'}
               type={'email'}
               fullWidth
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </Grid>
           <Grid item xs={12} >
@@ -48,22 +53,32 @@ const Home: NextPage = () => {
               label={'Quantia por mês'}
               type={'number'}
               fullWidth
+              value={valor}
+              onChange={(e) => setValor(e.target.value)}
             />
           </Grid>
         </Grid>
         <DialogActions sx={{mt: 5}} >
-            <Button color={'secondary'}>
-              Cancelar
+            <Button 
+              color={'secondary'}
+              onClick={() => setPetSelected(null)}
+            >
+                  Cancelar
             </Button>
-            <Button variant={'contained'}>
-              Confirmar adoção
+            <Button 
+                variant={'contained'}
+                onClick={() => adotar()}  
+            >
+                Confirmar adoção
             </Button>
         </DialogActions>
       </Dialog>
 
       <Snackbar 
-        open={true}
-        message={'boa boa boa'}
+        open={message.length > 0}
+        message={message}
+        autoHideDuration={2500}
+        onClose={() => setMessage('')}
       />
     </div>
   )

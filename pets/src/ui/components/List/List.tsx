@@ -1,10 +1,11 @@
 import { Button } from '@mui/material';
 import { Pet } from '../../../data/@types/Pet';
-import {ListStyled, ItemList, Photo, Information, Name, Description} from './List.style';
-import { TextService} from '../../../data/services/TextService';
+import {ListStyled, ItemList, Photo, Information, Name, Description } from './List.style';
+import { TextService } from '../../../data/services/TextService';
 
 interface ListProps {
   pets: Pet[];
+  onSelect: (pet: Pet) => void;
 }
 
 export default function List(props: ListProps) {
@@ -14,16 +15,18 @@ export default function List(props: ListProps) {
     <ListStyled>
       {props.pets.map(pet => (
           <ItemList key={pet.id} >
-            <Photo src={pet.photo} alt={pet.name} />
+            <Photo src={pet.foto} alt={pet.nome} />
             <Information>
-                <Name>{pet.name}</Name>
+                <Name>{pet.nome}</Name>
                 <Description>
-                    {TextService.limitarTexto(pet.history, tamanhoMaximoTexto)}
+                    {TextService.limitarTexto(pet.historia, tamanhoMaximoTexto)}
                   </Description>
                 <Button 
-                  variant={'contained'} 
-                  fullWidth >
-                    Adotar {pet.name}
+                    variant={'contained'} 
+                    fullWidth 
+                    onClick={() => props.onSelect(pet)}
+                >
+                    Adotar {pet.nome}
                 </Button>
             </Information>
           </ItemList>

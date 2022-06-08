@@ -22,9 +22,21 @@ public class PetBackendApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		var pet = new Pet();
 		pet.setNome("Oscar");
-		pet.setHistoria("Cachorro lindo, amigável e companheiro.");
-		pet.setFoto("http://www.example.com.br/photo.png");
+		pet.setHistoria("Cachorro lindo, amigável e companheiro, Lorem ipsum dolor sit amet consectetur adipisicing elit.");
+		pet.setFoto("https://media.istockphoto.com/photos/its-a-paddle-board-time-picture-id1327654972");
 		petRepository.save(pet);
+		
+		var pet2 = new Pet();
+		pet2.setNome("Lilia");
+		pet2.setHistoria("Cachorro lindo, amigável e companheiro, Lorem ipsum dolor sit amet consectetur adipisicing elit.");
+		pet2.setFoto("https://images.unsplash.com/photo-1561037404-61cd46aa615b");
+		petRepository.save(pet2);
+		
+		var pet3 = new Pet();
+		pet3.setNome("Thor");
+		pet3.setHistoria("Cachorro lindo, amigável e companheiro, Lorem ipsum dolor sit amet consectetur adipisicing elit.");
+		pet3.setFoto("https://images.unsplash.com/photo-1517849845537-4d257902454a");
+		petRepository.save(pet3);
 	}
 
 }
