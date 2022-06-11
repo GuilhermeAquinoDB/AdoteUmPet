@@ -13,6 +13,7 @@ import javax.validation.constraints.Size;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies.SnakeCaseStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 
+import br.com.student.api.pet.validators.PetExistsById;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -36,5 +37,6 @@ public class AdocaoRequest {
 	
 	@NotNull
 	@Positive
+	@PetExistsById
 	private Long petId;
 }
