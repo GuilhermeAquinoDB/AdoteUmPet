@@ -18,13 +18,13 @@ export function useIndex() {
 
   useEffect(() => {
     if(petSelected === null) {
-      clearForm();
+      cleanForm();
     }
   }, [petSelected])
 
-  function adotar(){
+  function toAdpt() {
     if(petSelected !== null) {
-        if(validatorDataAdocao()) {
+        if(validatorDataAdoption()) {
             ApiService.post('/adocoes', {
               pet_id: petSelected.id,
               email,
@@ -43,11 +43,11 @@ export function useIndex() {
     }
   }
 
-  function validatorDataAdocao(){
+  function validatorDataAdoption(){
     return email.length > 0 && valor.length > 0;
   }
 
-  function clearForm() {
+  function cleanForm() {
       setEmail('');
       setValor('');
   }
@@ -62,6 +62,6 @@ export function useIndex() {
     setValor,
     message,
     setMessage,
-    adotar
+    toAdpt
   };
 }
