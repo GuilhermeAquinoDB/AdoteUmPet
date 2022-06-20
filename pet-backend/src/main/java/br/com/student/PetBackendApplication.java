@@ -4,9 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 
 import br.com.student.core.models.Pet;
 import br.com.student.core.repositories.PetRepository;
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Info;
+import io.swagger.v3.oas.models.info.License;
 
 @SpringBootApplication
 public class PetBackendApplication implements CommandLineRunner {
@@ -37,6 +41,15 @@ public class PetBackendApplication implements CommandLineRunner {
 		pet3.setHistoria("Cachorro lindo, amigável e companheiro, Lorem ipsum dolor sit amet consectetur adipisicing elit.");
 		pet3.setFoto("https://images.unsplash.com/photo-1517849845537-4d257902454a");
 		petRepository.save(pet3);
+	}
+	
+	@Bean
+	public OpenAPI customOpenAPI() {
+		return new OpenAPI().info(new Info()
+				.title("Projeto Backend de Adoção de Pets")
+				.version("1.0")
+				.termsOfService("http://swagger.io/")
+				.license(new License().name("Apache 2.0").url("http://springdoc.org")));
 	}
 
 }
