@@ -10,7 +10,12 @@ export default function HeaderAdmin() {
   return (
     <HeaderContainer>
       <div>
-        <Logo src={'/images/logo.svg'} alt={'Adote um Pet'} />
+        <Link component={NextLink} href={'/'}>
+          <a>
+            <Logo src={'/images/logo.svg'} alt={'Adote um Pet'} />
+          </a>
+        </Link>
+        
         <LinksContainer>
             <Link component={NextLink} href={'/pets/cadastro'}>
               <a>Cadastrar Pet</a>
