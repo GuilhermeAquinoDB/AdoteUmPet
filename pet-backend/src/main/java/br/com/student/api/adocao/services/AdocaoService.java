@@ -1,6 +1,7 @@
 package br.com.student.api.adocao.services;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,8 +29,8 @@ public class AdocaoService {
 	public List<AdocaoResponse> findAll() {
 		return adocaoRepository.findAll()
 				.stream()
-				.map(adocaoMapper::toResponse)
-				.toList();
+				.map((adocao) -> adocaoMapper.toResponse(adocao))
+				.collect(Collectors.toList());
 	}
 
 }
