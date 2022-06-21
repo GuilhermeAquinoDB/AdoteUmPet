@@ -1,6 +1,7 @@
 package br.com.student.api.pet.services;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,8 +25,8 @@ public class PetService {
 		
 		return petRepository.findAll()
 			.stream()
-			.map(petMapper::toResponse)
-			.toList();
+			.map((pet) -> petMapper.toResponse(pet))
+				.collect(Collectors.toList());
 	}
 	
 	public PetResponse create(PetRequest petRequest) {
