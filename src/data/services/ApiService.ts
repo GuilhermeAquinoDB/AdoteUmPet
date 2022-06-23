@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const ApiService = axios.create({
-    baseURL: 'http://localhost:8080/api',
+    baseURL: 'https://adocao-pet.herokuapp.com/api',
     headers: {
       'Content-Type': 'application/json'
     }
