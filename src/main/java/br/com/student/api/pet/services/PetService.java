@@ -26,7 +26,7 @@ public class PetService {
 		return petRepository.findAll()
 			.stream()
 			.map((pet) -> petMapper.toResponse(pet))
-				.collect(Collectors.toList());
+			.collect(Collectors.toList());
 	}
 	
 	public PetResponse create(PetRequest petRequest) {
