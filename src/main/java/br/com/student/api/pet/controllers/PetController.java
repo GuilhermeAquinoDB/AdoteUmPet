@@ -1,21 +1,21 @@
 package br.com.student.api.pet.controllers;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
+import br.com.student.core.models.Pet;
+import br.com.student.core.repositories.PetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import br.com.student.api.pet.dtos.PetRequest;
 import br.com.student.api.pet.dtos.PetResponse;
 import br.com.student.api.pet.services.PetService;
+import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 @RequestMapping("/api/pets")
@@ -23,6 +23,7 @@ public class PetController {
 	
 	@Autowired
 	private PetService petService;
+	private PetRepository petRepository;
 	
 	@GetMapping
 	public List<PetResponse> findAll() {
@@ -33,7 +34,15 @@ public class PetController {
 	@PostMapping
 	@ResponseStatus(code = HttpStatus.CREATED)
 	public PetResponse create(@RequestBody @Valid PetRequest petRequest) {
+
 		return petService.create(petRequest);
+	}
+
+	@DeleteMapping("/{id}")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void delete(@PathVariable Long id) {
+
+		petService.excluir(id);
 	}
 	
 }
